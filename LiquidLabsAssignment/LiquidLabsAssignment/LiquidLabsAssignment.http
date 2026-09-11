@@ -1,0 +1,6 @@
+@LiquidLabsAssignment_HostAddress = http://localhost:5137
+
+GET {{LiquidLabsAssignment_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

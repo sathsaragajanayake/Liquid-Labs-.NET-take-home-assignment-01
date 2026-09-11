@@ -1,1 +1,0 @@
-# Liquid-Labs-.NET-take-home-assignment-01
