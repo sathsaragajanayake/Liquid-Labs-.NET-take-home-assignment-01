@@ -19,7 +19,7 @@ namespace LiquidLabsAssignment.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                using (var command = new SqlCommand("SELECT Id, UserId, Title, Body FROM Posts", connection))
+                using (var command = new SqlCommand("SELECT Id, User_Id, Title, Body FROM Posts", connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync()) //SqlDataReader
                     {
@@ -45,7 +45,7 @@ namespace LiquidLabsAssignment.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                using (var command = new SqlCommand("SELECT Id, UserId, Title, Body FROM Posts WHERE Id = @Id", connection))
+                using (var command = new SqlCommand("SELECT Id, User_Id, Title, Body FROM Posts WHERE Id = @Id", connection))
                 {
                     command.Parameters.AddWithValue("@Id", id); //parameterized SQL
                     using (var reader = await command.ExecuteReaderAsync())
@@ -64,6 +64,22 @@ namespace LiquidLabsAssignment.Data
                 }
             }
             return null;
+        }
+
+        public async Task AddPostAsync(Post post)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (var command = new SqlCommand("INSERT INTO Posts (Id, User_Id, Title, Body) VALUES (@Id, @UserId, @Title, @Body)", connection))
+                {
+                    command.Parameters.AddWithValue("@Id", post.Id);
+                    command.Parameters.AddWithValue("@UserId", post.UserId);
+                    command.Parameters.AddWithValue("@Title", post.Title);
+                    command.Parameters.AddWithValue("@Body", post.Body);
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }
