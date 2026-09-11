@@ -8,5 +8,6 @@
 - SQL SERVER 
 
 # Libraries
-- Swagger - Swashbuckle.AspNetCore - to visualize and test the API endpoints 
+- Swashbuckle.AspNetCore - to visualize and test the API endpoints 
+- Microsoft.Data.SqlClient - Used for direct communication with SQL Server
 
