@@ -7,9 +7,9 @@ namespace LiquidLabsAssignment.Middleware
     public class ExceptionHandling
     {
         private readonly RequestDelegate _next;
-        private readonly Logger<ExceptionHandling> _logger;
+        private readonly ILogger<ExceptionHandling> _logger;
 
-        public ExceptionHandling(RequestDelegate next, Logger<ExceptionHandling> logger)
+        public ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger)
         {
             _next = next;
             _logger = logger;
