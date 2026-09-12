@@ -1,4 +1,5 @@
 using LiquidLabsAssignment.Data;
+using LiquidLabsAssignment.Middleware;
 using LiquidLabsAssignment.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddHttpClient();  //allow our app to make HTTP requests to anot
 
 builder.Services.AddSwaggerGen(); //
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandling>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

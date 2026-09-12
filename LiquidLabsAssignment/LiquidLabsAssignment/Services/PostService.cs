@@ -7,11 +7,17 @@ namespace LiquidLabsAssignment.Services
     {
         private readonly PostRepository _postRepository;
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
+        private readonly string _externalApiUrl;
 
-        public PostService(PostRepository postRepository, HttpClient httpClient)
+        public PostService(PostRepository postRepository, HttpClient httpClient, IConfiguration configuration)
         {
             _postRepository = postRepository;
             _httpClient = httpClient;
+            _configuration = configuration;
+
+            _externalApiUrl = _configuration["ExternalApi:BaseUrl"]
+            ?? throw new InvalidOperationException("ExternalApiUrl is not configured.");
         }
 
         public async Task<List<Post>> GetPostsAsync()
@@ -20,7 +26,7 @@ namespace LiquidLabsAssignment.Services
 
             if (posts == null || posts.Count == 0)
             {
-                var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/posts");
+                var response = await _httpClient.GetAsync(_externalApiUrl);
                 response.EnsureSuccessStatusCode();
                 var postsFromApi = await response.Content.ReadFromJsonAsync<List<Post>>();
                 if (postsFromApi != null)
@@ -42,7 +48,7 @@ namespace LiquidLabsAssignment.Services
 
             if(posts == null)
             {
-                var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/posts/{id}");
+                var response = await _httpClient.GetAsync($"{_externalApiUrl}/{id}");
                 if (!response.IsSuccessStatusCode)
                 {
                     return null;
