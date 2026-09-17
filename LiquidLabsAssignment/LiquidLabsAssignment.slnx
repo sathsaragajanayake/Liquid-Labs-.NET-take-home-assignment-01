@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="LiquidLabsAssignment.Tests/LiquidLabsAssignment.Tests.csproj" Id="12321e52-4121-40fb-ac9f-5d984cdc3154" />
   <Project Path="LiquidLabsAssignment/LiquidLabsAssignment.csproj" />
 </Solution>
