@@ -15,6 +15,7 @@ then it will return the data from the database otherwise it will fetch the data 
 # Libraries
 - Swashbuckle.AspNetCore - to visualize and test the API endpoints 
 - Microsoft.Data.SqlClient - Used for direct communication with SQL Server
+- CtorMock.Moq - For Unit Tests, Used to mock the repository dependency
 
 # PreRequisites
 install the following tools to run the application:
@@ -107,4 +108,24 @@ dotnet run
 4. Open Swagger UI at `https://localhost:xxxx/swagger` to test the API endpoints.
 
 5. Database connection string should be set as an environment variable before running the application. `ConnectionStrings__DefaultConnection`
+
+# Unit Testing
+
+- The project includes a separate xUnit test project called `LiquidLabsAssignment.Tests`
+- xUnit - Used as the unit testing framework.
+
+# To run the unit tests:
+- From the solution directory, run:
+  ```bash 
+  dotnet test
+  ```
+- This will build the test project and run all available unit tests.
+
+# To run tests using Visual Studio:
+
+- Open the solution in Visual Studio.
+- Build the solution.
+- Open Test then Test Explorer.
+- Select Run All.
+
 
