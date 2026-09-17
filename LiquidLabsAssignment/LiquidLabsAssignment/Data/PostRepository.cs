@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace LiquidLabsAssignment.Data
 {
-    public class PostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly string _connectionString;
 

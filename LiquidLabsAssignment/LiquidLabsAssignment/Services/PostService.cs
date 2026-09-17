@@ -5,12 +5,12 @@ namespace LiquidLabsAssignment.Services
 {
     public class PostService
     {
-        private readonly PostRepository _postRepository;
+        private readonly IPostRepository _postRepository;
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly string _externalApiUrl;
 
-        public PostService(PostRepository postRepository, HttpClient httpClient, IConfiguration configuration)
+        public PostService(IPostRepository postRepository, HttpClient httpClient, IConfiguration configuration)
         {
             _postRepository = postRepository;
             _httpClient = httpClient;
