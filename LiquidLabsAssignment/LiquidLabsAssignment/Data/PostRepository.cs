@@ -10,7 +10,7 @@ namespace LiquidLabsAssignment.Data
         public PostRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection")
-                ?? throw new ArgumentNullException(nameof(configuration));
+                ?? throw new InvalidOperationException(nameof(configuration));
         }
 
         public async Task<List<Post>> GetPostsAsync()
