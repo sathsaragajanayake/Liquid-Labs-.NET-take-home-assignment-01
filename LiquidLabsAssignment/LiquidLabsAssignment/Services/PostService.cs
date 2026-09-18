@@ -42,7 +42,7 @@ namespace LiquidLabsAssignment.Services
             return posts;
         }
 
-        public async Task<Post?> GetPostByIdAsync(int id)
+        public async Task<(Post? post, string message)> GetPostByIdAsync(int id)
         {
             var posts = await _postRepository.GetPostByIdAsync(id);
 
@@ -51,7 +51,7 @@ namespace LiquidLabsAssignment.Services
                 var response = await _httpClient.GetAsync($"{_externalApiUrl}/{id}");
                 if (!response.IsSuccessStatusCode)
                 {
-                    return null;
+                    return (null, "Post not found in DB or API");
                 }
 
                 response.EnsureSuccessStatusCode();
@@ -59,11 +59,11 @@ namespace LiquidLabsAssignment.Services
                 if (postFromApi != null)
                 {
                     await _postRepository.AddPostAsync(postFromApi);
-                    return postFromApi;
+                    return (postFromApi, "Post retrieved from API and saved to DB");
                 }
-                return null;
+                return (null, "Post not found in API");
             }
-            return posts;
+            return (posts, "Post retrieved from DB");
         }
     }
 }

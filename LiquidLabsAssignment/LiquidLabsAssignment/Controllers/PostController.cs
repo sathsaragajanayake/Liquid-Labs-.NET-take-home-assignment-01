@@ -28,11 +28,11 @@ namespace LiquidLabsAssignment.Controllers;
     [HttpGet("{id}")]
     public async Task<ActionResult<Post>> GetPost(int id)
     {
-        var post = await _postService.GetPostByIdAsync(id);
+        var (post, message) = await _postService.GetPostByIdAsync(id);
         if (post == null)
         {
-            return NotFound();
+            return NotFound(new { message });
         }
-        return Ok(post);
+        return Ok(new { post, message });
     }
 }
